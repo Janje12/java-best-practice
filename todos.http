@@ -1,0 +1,45 @@
+###
+POST http://localhost:8080/api/todos
+Content-Type: application/json
+
+{
+  "title": "{{$random.alphabetic(5)}}",
+  "description": "{{$random.alphabetic(15)}}"
+}
+> {%
+    client.global.set("id", response.body.id);
+%}
+
+###
+PATCH http://localhost:8080/api/todos/5
+Content-Type: application/json
+
+{
+  "title": "UPDATED_{{$random.alphabetic(5)}}",
+  "description": "UPDATED_{{$random.alphabetic(15)}}"
+}
+
+
+###
+DELETE http://localhost:8080/api/todos/{{id}}
+Content-Type: application/json
+
+###
+DELETE http://localhost:8080/api/todos/2
+Content-Type: application/json
+
+
+###
+GET http://localhost:8080/api/todos/2
+Accept: application/json
+
+###
+GET http://localhost:8080/api/todos/99
+Accept: application/json
+
+###
+GET http://localhost:8080/api/todos?pageNumber=0
+Accept: application/json
+
+
+

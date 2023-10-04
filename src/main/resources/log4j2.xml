@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <Loki name="Loki" bufferSizeMegabytes="64">
+            <host>localhost</host>
+            <port>3100</port>
+
+            <ThresholdFilter level="ALL"/>
+            <PatternLayout>
+                <Pattern>%X{tid} [%t] %d{MM-dd HH:mm:ss.SSS} %5p %c{1} - %m%n%exception{full}</Pattern>
+            </PatternLayout>
+
+            <Header name="X-Scope-OrgID" value="Circus"/>
+            <Label name="server" value="127.0.0.1"/>
+
+            <LogLevelLabel>log_level</LogLevelLabel>
+        </Loki>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Loki"/>
+        </Root>
+    </Loggers>
+</Configuration>
